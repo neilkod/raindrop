@@ -5,12 +5,14 @@ from tweepy.auth import BasicAuthHandler
 from tweepy.streaming import StreamListener, Stream
 import datetime
 import ConfigParser
+import raindrop_utils
 
 CONFIG_FILE = 'earthquake.cfg'
 TWITTER_SCREEN_NAME = 'neilkod'
 
-uri = 'mongodb://neilkod:startmongo@staff.mongohq.com:10055/earthquakes'
-connection = Connection(uri)
+#uri = 'mongodb://neilkod:xyz@staff.mongohq.com:10055/earthquakes'
+mongo_uri = raindrop_utils.get_mongo_uri(CONFIG_FILE)
+connection = Connection(mongo_uri)
 db=connection.earthquakes
 
 KEYWORDS = ['earthquake','cnet','brewers','yankees','yankees']
@@ -31,7 +33,7 @@ def get_twitter_config(config_file = CONFIG_FILE, screen_name = TWITTER_SCREEN_N
   return twitter_params
 
 
-#mongo --host staff.mongohq.com --port 10055 earthquakes -u neilkod -pstartmongo
+#mongo --host staff.mongohq.com --port 10055 earthquakes -u neilkod -ppwd
 #{ "_id" : ObjectId("4e545afe584424412eef3ddf"), "name" : "earthquake", "count" : 3 }
 
 
@@ -75,10 +77,6 @@ class Listener ( StreamListener ):
 
 def main():
   try:
-    CONSUMER_KEY = 'g4QqQPEtZQ1e5bTrK1g5g'
-    CONSUMER_SECRET = 'RNmSqVdv4sfSWyGQKrdewQPD6jOnceIxdS0VxveOo'
-    ACCESS_KEY = '801593-JhdIntnEvAKgUs94iYLYv6Yi5miLReEeD24SJ1qiU'
-    ACCESS_SECRET = '5KtPpyAB1UlKRZ3M7k4FA55FsGAT1stUicl4J0obk'
     config = get_twitter_config(CONFIG_FILE, TWITTER_SCREEN_NAME)
     auth = tweepy.OAuthHandler(config['consumer_key'], config['consumer_secret'])
     auth.set_access_token(config['access_key'], config['access_secret'])
