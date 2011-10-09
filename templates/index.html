@@ -1,0 +1,22 @@
+$def with (data) 
+$ cnt = data[0] 
+<html>
+<title>prototype tweet counter</title>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function() {
+setInterval(function () { jQuery("#myDiv").load('cnt'); }, 5000);
+});
+</script>
+</head>
+<body>
+<h2>live count of tweets mentioning 'earthquake' since 23-Aug-2011 10 PM </h2><br>
+<br>
+<br>
+original value: $cnt
+<br>
+<br>
+<h3><div id="myDiv">$cnt</div><br></h3>
+</body>
+</html>

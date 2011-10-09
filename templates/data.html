@@ -1,0 +1,47 @@
+$def with (data)
+$ values = data[0]
+$ term = data[1]
+$ cnt = data[2]
+<html>
+<title>prototype tweet counter</title>
+<head>
+	<style type="text/css">
+
+	table, td, th
+	{
+	border:1px solid green;
+	}
+	th
+	{
+	background-color:green;
+	color:white;
+	}
+	</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function() {
+setInterval(function () { jQuery("#myDiv").load('/cnt/$term'); },4000);
+});
+</script>
+</head>
+<body>
+<h2>tweet data </h2><br>
+<br>
+<h2>live count of tweets mentioning '$term' </h2>
+<br>
+<h3><div id="myDiv">$cnt</div></h3>
+5-minute detail
+<br>
+<table style="{border: 1px solid}">
+	<tr>
+		<th>period</th>
+		<th>count</th>
+	</tr>
+	$for x in values:
+	<tr>
+		<td>$x[0]</td>
+		<td>$x[1]</td>
+	</tr>
+</table>
+</body>
+</html>
