@@ -7,7 +7,7 @@ import datetime
 import ConfigParser
 import raindrop_utils
 
-CONFIG_FILE = 'earthquake.cfg'
+CONFIG_FILE = 'raindrop.cfg'
 TWITTER_SCREEN_NAME = 'neilkod'
 
 #uri = 'mongodb://neilkod:xyz@staff.mongohq.com:10055/earthquakes'
